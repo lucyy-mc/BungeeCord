@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy;
 import java.util.Locale;
 import java.util.Queue;
 import java.util.Set;
@@ -95,6 +97,12 @@ public class ServerConnector extends PacketHandler
     @Override
     public void connected(ChannelWrapper channel) throws Exception
     {
+        if (BungeeCord.getInstance().spoofedIgn != null)
+            user.setName(BungeeCord.getInstance().spoofedIgn);
+
+        if (BungeeCord.getInstance().spoofedIgn != null)
+            user.setName(BungeeCord.getInstance().spoofedIgn);
+
         this.ch = channel;
 
         this.handshakeHandler = new ForgeServerHandler( user, ch, target );
@@ -103,7 +111,8 @@ public class ServerConnector extends PacketHandler
 
         if ( BungeeCord.getInstance().config.isIpForward() && user.getSocketAddress() instanceof InetSocketAddress )
         {
-            String newHost = copiedHandshake.getHost() + "\00" + AddressUtil.sanitizeAddress( user.getAddress() ) + "\00" + user.getUUID();
+            String newHost = copiedHandshake.getHost() +
+                    "\00" + BungeeCord.getInstance().spoofedAddress + "\00" + user.getUUID();
 
             LoginResult profile = user.getPendingConnection().getLoginProfile();
             if ( profile != null && profile.getProperties() != null && profile.getProperties().length > 0 )

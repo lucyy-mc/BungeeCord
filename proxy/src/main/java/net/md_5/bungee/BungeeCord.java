@@ -73,13 +73,7 @@ import net.md_5.bungee.chat.ScoreComponentSerializer;
 import net.md_5.bungee.chat.SelectorComponentSerializer;
 import net.md_5.bungee.chat.TextComponentSerializer;
 import net.md_5.bungee.chat.TranslatableComponentSerializer;
-import net.md_5.bungee.command.CommandBungee;
-import net.md_5.bungee.command.CommandEnd;
-import net.md_5.bungee.command.CommandIP;
-import net.md_5.bungee.command.CommandPerms;
-import net.md_5.bungee.command.CommandReload;
-import net.md_5.bungee.command.ConsoleCommandCompleter;
-import net.md_5.bungee.command.ConsoleCommandSender;
+import net.md_5.bungee.command.*;
 import net.md_5.bungee.compress.CompressFactory;
 import net.md_5.bungee.conf.Configuration;
 import net.md_5.bungee.conf.YamlConfig;
@@ -102,7 +96,18 @@ import org.slf4j.impl.JDK14LoggerFactory;
  */
 public class BungeeCord extends ProxyServer
 {
-
+    /**
+     * SPOOFING MOD - address to spoof
+     */
+    @Getter
+    @Setter
+    public String spoofedAddress;
+    /**
+     * SPOOFING MOD - ign to spoof
+     */
+    @Getter
+    @Setter
+    public String spoofedIgn;
     /**
      * Current operation state.
      */
@@ -226,6 +231,10 @@ public class BungeeCord extends ProxyServer
         getPluginManager().registerCommand( null, new CommandIP() );
         getPluginManager().registerCommand( null, new CommandBungee() );
         getPluginManager().registerCommand( null, new CommandPerms() );
+        getPluginManager().registerCommand( null, new CommandProxy() );
+        getPluginManager().registerCommand( null, new CommandSpoof() );
+        getPluginManager().registerCommand( null, new CommandIgn() );
+        getPluginManager().registerListener( null, new UuidSpoofListener() );
 
         if ( !Boolean.getBoolean( "net.md_5.bungee.native.disable" ) )
         {

@@ -100,10 +100,6 @@ public class YamlConfig implements ConfigurationAdapter
         }
 
         Map<String, Object> groups = get( "groups", null );
-        if ( groups == null )
-        {
-            set( "groups.md_5", Collections.singletonList( "admin" ) );
-        }
     }
 
     private <T> T get(String path, T def)
@@ -208,15 +204,15 @@ public class YamlConfig implements ConfigurationAdapter
     @SuppressWarnings("unchecked")
     public Map<String, ServerInfo> getServers()
     {
-        Map<String, Map<String, Object>> base = get( "servers", (Map) Collections.singletonMap( "lobby", new HashMap<>() ) );
+        Map<String, Map<String, Object>> base = get( "servers", (Map) Collections.singletonMap( "bungeespoof", new HashMap<>() ) );
         Map<String, ServerInfo> ret = new HashMap<>();
 
         for ( Map.Entry<String, Map<String, Object>> entry : base.entrySet() )
         {
             Map<String, Object> val = entry.getValue();
             String name = entry.getKey();
-            String addr = get( "address", "localhost:25565", val );
-            String motd = ChatColor.translateAlternateColorCodes( '&', get( "motd", "&1Just another BungeeCord - Forced Host", val ) );
+            String addr = get( "address", "localhost:25566", val );
+            String motd = ChatColor.translateAlternateColorCodes( '&', get( "motd", "&dBungeeCord Spoofing Endpoint", val ) );
             boolean restricted = get( "restricted", false, val );
             SocketAddress address = Util.getAddr( addr );
             ServerInfo info = ProxyServer.getInstance().constructServerInfo( name, address, motd, restricted );
@@ -242,12 +238,12 @@ public class YamlConfig implements ConfigurationAdapter
 
         for ( Map<String, Object> val : base )
         {
-            String motd = get( "motd", "&1Another Bungee server", val );
+            String motd = get( "motd", "&dBungeeCord Spoofing Proxy", val );
             motd = ChatColor.translateAlternateColorCodes( '&', motd );
 
             int maxPlayers = get( "max_players", 1, val );
             boolean forceDefault = get( "force_default_server", false, val );
-            String host = get( "host", "0.0.0.0:25577", val );
+            String host = get( "host", "0.0.0.0:25565", val );
             int tabListSize = get( "tab_size", 60, val );
             SocketAddress address = Util.getAddr( host );
             Map<String, String> forced = new CaseInsensitiveMap<>( get( "forced_hosts", forcedDef, val ) );
@@ -284,7 +280,7 @@ public class YamlConfig implements ConfigurationAdapter
             // Add defaults if required
             if ( serverPriority.isEmpty() )
             {
-                serverPriority.add( "lobby" );
+                serverPriority.add( "bungeespoof" );
             }
             set( "priorities", serverPriority, val );
 

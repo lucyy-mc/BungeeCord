@@ -71,7 +71,7 @@
     </distributionManagement>
 
     <properties>
-        <build.number>unknown</build.number>
+        <build.number>1540</build.number>
         <lombok.version>1.18.20</lombok.version>
         <netty.version>4.1.65.Final</netty.version>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -124,7 +124,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -153,7 +153,7 @@
                         <version>8.44</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-maven-plugin</artifactId>

@@ -75,8 +75,9 @@ public final class UserConnection implements ProxiedPlayer
     @NonNull
     private final ChannelWrapper ch;
     @Getter
+    @Setter
     @NonNull
-    private final String name;
+    private String name;
     @Getter
     private final InitialHandler pendingConnection;
     /*========================================================================*/

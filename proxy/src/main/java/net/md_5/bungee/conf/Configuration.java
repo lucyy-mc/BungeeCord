@@ -46,7 +46,7 @@ public class Configuration implements ProxyConfig
     /**
      * Should we check minecraft.net auth.
      */
-    private boolean onlineMode = true;
+    private boolean onlineMode = false;
     /**
      * Whether we log proxy commands to the proxy log
      */
@@ -59,7 +59,7 @@ public class Configuration implements ProxyConfig
     private int remotePingTimeout = 5000;
     private int throttle = 4000;
     private int throttleLimit = 3;
-    private boolean ipForward;
+    private boolean ipForward = true;
     private Favicon favicon;
     private int compressionThreshold = 256;
     private boolean preventProxyConnections;
