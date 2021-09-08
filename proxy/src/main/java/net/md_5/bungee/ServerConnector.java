@@ -100,9 +100,6 @@ public class ServerConnector extends PacketHandler
         if (BungeeCord.getInstance().spoofedIgn != null)
             user.setName(BungeeCord.getInstance().spoofedIgn);
 
-        if (BungeeCord.getInstance().spoofedIgn != null)
-            user.setName(BungeeCord.getInstance().spoofedIgn);
-
         this.ch = channel;
 
         this.handshakeHandler = new ForgeServerHandler( user, ch, target );
